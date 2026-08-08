@@ -1,0 +1,173 @@
+generated: '2026-08-08'
+method: derived
+source: mcp/boat-lifestyle-tools-list.json
+note: >-
+  Entity graph derived from the inputSchema of the 13 MCP tools returned by an
+  anonymous tools/list. There is no OpenAPI to derive from; every entity and field
+  below appears verbatim in the fetched tool schemas.
+identifier_format:
+  style: Shopify global identifier (GID)
+  example_form: gid://shopify/Checkout/{id}
+entities:
+- name: Product
+  domain: catalog
+  operations:
+  - get_product
+  - lookup_catalog
+  - search_catalog
+  fields:
+  - id
+  - selected[].name
+  - selected[].label
+  - preferences
+  note: Variants are selected via the `selected` option name/label pairs.
+- name: Cart
+  domain: cart
+  operations:
+  - create_cart
+  - get_cart
+  - update_cart
+  - cancel_cart
+  fields:
+  - id
+  - line_items
+  - buyer
+  - context
+  - attribution
+  - fulfillment
+  - discounts
+- name: Checkout
+  domain: checkout
+  operations:
+  - create_checkout
+  - get_checkout
+  - update_checkout
+  - complete_checkout
+  - cancel_checkout
+  fields:
+  - id
+  - cart_id
+  - line_items
+  - buyer
+  - payment
+  - fulfillment
+  - discounts
+  - context
+  - attribution
+- name: LineItem
+  domain: cart
+  fields:
+  - id
+  - quantity
+  - item
+- name: Buyer
+  domain: identity
+  fields:
+  - email
+  - phone_number
+- name: PaymentInstrument
+  domain: payment
+  fields:
+  - instruments[]
+  note: Populated per the payment handlers declared in /.well-known/ucp (Google Pay,
+    Shopify card).
+- name: FulfillmentMethod
+  domain: fulfillment
+  fields:
+  - methods[]
+  note: Store config allows shipping only, single destination, no method combinations.
+- name: Discount
+  domain: promotion
+  fields:
+  - codes[]
+  note: Codes are case-insensitive and replace previously submitted codes.
+- name: Order
+  domain: order
+  operations:
+  - get_order
+  fields:
+  - id
+- name: BuyerContext
+  domain: localization
+  fields:
+  - address_country
+  - address_region
+  - postal_code
+  - language
+  - currency
+  - intent
+  - eligibility
+- name: Attribution
+  domain: marketing
+  fields:
+  - referring_domain
+  - click_id_tag
+  - click_id_value
+  - activity_id_tag
+  - activity_id_value
+  - utm_campaign
+  - utm_source
+  - utm_medium
+  - utm_content
+  - utm_term
+relationships:
+- from: Checkout
+  to: Cart
+  type: belongs_to
+  via: cart_id
+- from: Cart
+  to: LineItem
+  type: has_many
+  via: line_items
+- from: Checkout
+  to: LineItem
+  type: has_many
+  via: line_items
+- from: Cart
+  to: Buyer
+  type: has_one
+  via: buyer
+- from: Checkout
+  to: Buyer
+  type: has_one
+  via: buyer
+- from: Checkout
+  to: PaymentInstrument
+  type: has_many
+  via: payment.instruments
+- from: Checkout
+  to: FulfillmentMethod
+  type: has_many
+  via: fulfillment.methods
+- from: Cart
+  to: FulfillmentMethod
+  type: has_many
+  via: fulfillment.methods
+- from: Checkout
+  to: Discount
+  type: has_many
+  via: discounts.codes
+- from: Cart
+  to: Discount
+  type: has_many
+  via: discounts.codes
+- from: LineItem
+  to: Product
+  type: belongs_to
+  via: item
+- from: Cart
+  to: BuyerContext
+  type: has_one
+  via: context
+- from: Checkout
+  to: BuyerContext
+  type: has_one
+  via: context
+- from: Cart
+  to: Attribution
+  type: has_one
+  via: attribution
+- from: Checkout
+  to: Attribution
+  type: has_one
+  via: attribution

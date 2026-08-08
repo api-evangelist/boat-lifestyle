@@ -1,0 +1,81 @@
+generated: '2026-08-08'
+method: searched
+source:
+- https://www.boat-lifestyle.com/.well-known/openid-configuration
+- https://www.boat-lifestyle.com/.well-known/oauth-authorization-server
+- https://www.boat-lifestyle.com/.well-known/oauth-protected-resource
+- https://www.boat-lifestyle.com/agents.md
+note: >-
+  Derived from live discovery documents rather than an OpenAPI — boAt Lifestyle
+  publishes no OpenAPI. The identity layer is Shopify Customer Accounts; the
+  storefront host publishes the discovery documents but the issuer is Shopify.
+summary:
+  types:
+  - openIdConnect
+  - oauth2
+  oauth2_flows:
+  - authorizationCode
+  anonymous_surface: >-
+    The UCP MCP tools/list, catalog and cart tools answer without credentials.
+    Buyer-scoped operations (order retrieval, saved customer data) require an
+    access token from the Shopify authorization server.
+schemes:
+- name: ShopifyCustomerAccountsOIDC
+  type: openIdConnect
+  openIdConnectUrl: https://www.boat-lifestyle.com/.well-known/openid-configuration
+  issuer: https://shopify.com/authentication/5789384802
+  authorization_endpoint: https://shopify.com/authentication/5789384802/oauth/authorize
+  token_endpoint: https://shopify.com/authentication/5789384802/oauth/token
+  end_session_endpoint: https://shopify.com/authentication/5789384802/logout
+  jwks_uri: https://shopify.com/authentication/5789384802/.well-known/jwks.json
+  response_types_supported:
+  - code
+  grant_types_supported:
+  - authorization_code
+  - refresh_token
+  - urn:ietf:params:oauth:grant-type:jwt-bearer
+  token_endpoint_auth_methods_supported:
+  - client_secret_basic
+  code_challenge_methods_supported:
+  - S256
+  id_token_signing_alg_values_supported:
+  - RS256
+  subject_types_supported:
+  - public
+  claims_supported:
+  - iss
+  - sub
+  - aud
+  - exp
+  - iat
+  - nonce
+  - sid
+  - email
+  - email_verified
+  sources:
+  - well-known/boat-lifestyle-openid-configuration.json
+- name: UCPAgentProfile
+  type: agentIdentity
+  in: request body
+  field: meta.ucp-agent.profile
+  format: uri
+  required: true
+  note: >-
+    Not an authentication scheme in the OAuth sense — a mandatory agent-profile URI
+    every MCP tool call must carry, used for agent attestation and policy.
+  sources:
+  - mcp/boat-lifestyle-tools-list.json
+protected_resource:
+  resource: https://www.boat-lifestyle.com
+  authorization_servers:
+  - https://shopify.com/authentication/5789384802
+  bearer_methods_supported:
+  - header
+  spec: RFC 9728 OAuth 2.0 Protected Resource Metadata
+  sources:
+  - well-known/boat-lifestyle-oauth-protected-resource.json
+pkce:
+  required: true
+  methods:
+  - S256
+docs: https://www.boat-lifestyle.com/agents.md

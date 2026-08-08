@@ -1,0 +1,50 @@
+generated: '2026-08-08'
+method: searched
+source: https://www.boat-lifestyle.com/.well-known/openid-configuration
+docs: https://www.boat-lifestyle.com/.well-known/oauth-authorization-server
+note: >-
+  Scopes are published in the OIDC/RFC 8414 discovery document served from the boAt
+  Lifestyle storefront host. There is no OpenAPI declaring oauth2 securitySchemes;
+  this is the authoritative published scope list for the surface.
+schemes:
+- name: ShopifyCustomerAccountsOIDC
+  source: well-known/boat-lifestyle-openid-configuration.json
+  issuer: https://shopify.com/authentication/5789384802
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://shopify.com/authentication/5789384802/oauth/authorize
+    tokenUrl: https://shopify.com/authentication/5789384802/oauth/token
+    pkce: S256
+scopes:
+- scope: openid
+  description: Standard OpenID Connect scope requesting an ID token for the authenticated
+    buyer.
+  flows:
+  - authorizationCode
+  sources:
+  - well-known/boat-lifestyle-openid-configuration.json
+- scope: email
+  description: Releases the buyer's email address and email_verified claim.
+  flows:
+  - authorizationCode
+  sources:
+  - well-known/boat-lifestyle-openid-configuration.json
+- scope: customer-account-api:full
+  description: Full access to the Shopify Customer Account API on behalf of the authenticated
+    buyer — orders, addresses, profile and payment methods.
+  flows:
+  - authorizationCode
+  sources:
+  - well-known/boat-lifestyle-openid-configuration.json
+- scope: customer-account-mcp-api:full
+  description: Full access to the buyer-scoped Customer Account MCP API, the authenticated
+    counterpart to the anonymous commerce MCP endpoint at /api/ucp/mcp.
+  flows:
+  - authorizationCode
+  sources:
+  - well-known/boat-lifestyle-openid-configuration.json
+x-evidence:
+  fetched: '2026-08-08'
+  url: https://www.boat-lifestyle.com/.well-known/openid-configuration
+  http_status: 200
+  content_type: application/json; charset=utf-8

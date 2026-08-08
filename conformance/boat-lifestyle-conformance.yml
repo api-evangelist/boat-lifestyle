@@ -1,0 +1,89 @@
+generated: '2026-08-08'
+method: derived
+source:
+- well-known/boat-lifestyle-ucp.json
+- well-known/boat-lifestyle-openid-configuration.json
+- well-known/boat-lifestyle-oauth-protected-resource.json
+- mcp/boat-lifestyle-tools-list.json
+- https://www.boat-lifestyle.com/agents.md
+note: >-
+  Conformance assessed against the documents the storefront host actually serves.
+  Every "conforms: true" below is backed by a fetched artifact in this repo. The
+  underlying implementation is Shopify's platform, so these are platform-conferred
+  conformances, not boAt-authored ones.
+standards:
+- id: ucp-2026-04-08
+  name: Universal Commerce Protocol 2026-04-08
+  conforms: true
+  evidence: /.well-known/ucp advertises version 2026-04-08 with the dev.ucp.shopping
+    service over MCP transport and eight declared capabilities.
+- id: mcp
+  name: Model Context Protocol
+  conforms: true
+  evidence: Anonymous JSON-RPC 2.0 tools/list at /api/ucp/mcp returned 200 with 13
+    tools, each carrying an inputSchema.
+- id: jsonrpc-2.0
+  name: JSON-RPC 2.0
+  conforms: true
+  evidence: tools/list response carries jsonrpc "2.0" with matching request id.
+- id: json-schema-2020-12
+  name: JSON Schema draft 2020-12
+  conforms: true
+  evidence: Every MCP tool inputSchema declares $schema https://json-schema.org/draft/2020-12/schema.
+- id: oidc-discovery
+  name: OpenID Connect Discovery 1.0
+  conforms: true
+  evidence: /.well-known/openid-configuration returns issuer, authorization/token/jwks
+    endpoints and RS256 id_token signing.
+- id: rfc8414
+  name: RFC 8414 OAuth 2.0 Authorization Server Metadata
+  conforms: true
+  evidence: /.well-known/oauth-authorization-server returns 200 with authorization
+    server metadata.
+- id: rfc9728
+  name: RFC 9728 OAuth 2.0 Protected Resource Metadata
+  conforms: true
+  evidence: /.well-known/oauth-protected-resource returns resource, authorization_servers
+    and bearer_methods_supported.
+- id: oauth2-pkce
+  name: RFC 7636 PKCE
+  conforms: true
+  evidence: code_challenge_methods_supported declares S256.
+- id: idempotency
+  name: Idempotent mutating operations
+  conforms: true
+  evidence: complete_checkout requires meta.idempotency-key.
+- id: cursor-pagination
+  name: Cursor pagination
+  conforms: true
+  evidence: search_catalog accepts catalog.pagination.cursor and limit.
+- id: rfc9116-security-txt
+  name: RFC 9116 security.txt
+  conforms: false
+  evidence: /.well-known/security.txt returned 404 (control path also 404, so this
+    is a true miss).
+- id: rfc9457-problem-details
+  name: RFC 9457 Problem Details
+  conforms: false
+  evidence: No application/problem+json surface; errors are JSON-RPC error objects.
+- id: openapi
+  name: OpenAPI
+  conforms: false
+  evidence: No OpenAPI published at the storefront host, the myshopify canonical host,
+    or any /openapi.json, /swagger.json, /api-docs path probed.
+- id: a2a
+  name: A2A Agent Card
+  conforms: false
+  evidence: /.well-known/agent-card.json and /.well-known/agent.json both returned
+    404 on www.boat-lifestyle.com and boatlifestylein.myshopify.com.
+- id: asyncapi
+  name: AsyncAPI
+  conforms: false
+  evidence: No event, streaming or webhook surface is published on the storefront.
+compliance_program:
+  published: false
+  note: >-
+    No trust center, certification listing (SOC 2 / ISO 27001 / PCI DSS) or
+    compliance page was found on boat-lifestyle.com. Payment card handling is
+    delegated to Shopify and Google Pay per the UCP payment_handlers block; boAt
+    publishes no compliance posture of its own. No Compliance pointer is emitted.

@@ -1,0 +1,43 @@
+generated: '2026-08-08'
+method: searched
+source:
+- https://www.boat-lifestyle.com/.well-known/ucp
+- https://www.boat-lifestyle.com/agents.md
+versioning:
+  scheme: dated protocol version
+  current: '2026-04-08'
+  supported:
+  - version: '2026-04-08'
+    status: latest stable
+    profile: https://boatlifestylein.myshopify.com/.well-known/ucp/2026-04-08
+  - version: '2026-01-23'
+    status: supported
+    profile: https://boatlifestylein.myshopify.com/.well-known/ucp/2026-01-23
+  negotiation: >-
+    Agents discover supported versions from the supported_versions map in
+    /.well-known/ucp. Capabilities declare a requires.protocol.min floor —
+    fulfillment and discount both require a minimum protocol of 2026-04-08.
+  docs: https://www.boat-lifestyle.com/.well-known/ucp
+deprecation:
+  policy_url: null
+  sunset_header: unknown
+  published: false
+  note: >-
+    Version 2026-01-23 remains advertised alongside 2026-04-08, so an older protocol
+    version is still served, but boAt publishes no deprecation policy, no sunset
+    date and no RFC 8594 Sunset/Deprecation header contract of its own. The
+    versioning cadence is inherited from the UCP specification at ucp.dev.
+status_page:
+  url: null
+  published: false
+  note: No status page was found for boat-lifestyle.com or its agent surface.
+sla:
+  url: null
+  published: false
+changelog:
+  url: null
+  published: false
+  note: >-
+    No dated changelog for the commerce or agent surface. Protocol change history
+    lives with the UCP specification, not with the merchant.
+deprecated_operations: []

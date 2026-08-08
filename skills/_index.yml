@@ -1,0 +1,35 @@
+generated: '2026-08-08'
+method: searched
+note: >-
+  boAt Lifestyle publishes its own agent instruction document at /agents.md and
+  mirrors it at /llms.txt. That document is saved verbatim below; the second entry
+  is an API Evangelist skill packaging the same flow against the verified MCP tool
+  names and their required fields.
+skills:
+- file: boat-lifestyle-agents.md
+  name: Agent Instructions — boAt Lifestyle
+  method: searched
+  source: https://www.boat-lifestyle.com/agents.md
+  http_status: 200
+  api: mcp/boat-lifestyle-mcp.yml
+  note: Provider-published, saved verbatim. Advertised in robots.txt and in the dedicated
+    /sitemap_agentic_discovery.xml.
+- file: boat-lifestyle-agent-commerce.md
+  name: boAt Lifestyle agent commerce — search, cart, checkout
+  method: generated
+  source: mcp/boat-lifestyle-tools-list.json
+  api: mcp/boat-lifestyle-mcp.yml
+  operations:
+  - search_catalog
+  - lookup_catalog
+  - get_product
+  - create_cart
+  - update_cart
+  - get_cart
+  - cancel_cart
+  - create_checkout
+  - update_checkout
+  - get_checkout
+  - complete_checkout
+  - cancel_checkout
+  - get_order

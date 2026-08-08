@@ -1,23 +1,116 @@
 aid: boat-lifestyle
 name: Boat Lifestyle
-description: 'Boat Lifestyle is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: 'boAt (legal entity Imagine Marketing Limited) is an India-based consumer
+  electronics brand founded in 2016 by Aman Gupta and Sameer Mehta, selling wireless
+  earbuds, headphones, smartwatches, home audio and mobile accessories. Its direct-to-consumer
+  storefront at boat-lifestyle.com runs on Shopify and exposes a real, anonymous agent
+  commerce surface: a Universal Commerce Protocol (UCP 2026-04-08) merchant profile
+  at /.well-known/ucp, a live MCP endpoint at /api/ucp/mcp serving 13 catalog, cart,
+  checkout and order tools over JSON-RPC, published agent instructions at /agents.md
+  and /llms.txt, and Shopify Customer Accounts OpenID Connect discovery. There is no
+  first-party developer program, no OpenAPI, and no partner API portal — the machine-readable
+  contract is the MCP tools/list manifest, which is platform-provided by Shopify rather
+  than authored by boAt.'
 url: https://raw.githubusercontent.com/api-evangelist/boat-lifestyle/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
 specificationVersion: '0.20'
 created: '2026-08-08'
 modified: '2026-08-08'
+image: https://www.boat-lifestyle.com/cdn/shop/files/profile-1_2e1d2124-ba4c-43f0-bb83-0e6ee038ff30.png?v=1681111976
 tags:
 - Company
-apis: []
+- Consumer Electronics
+- Ecommerce
+- Retail
+- Audio
+- Wearables
+- Agent Commerce
+- MCP
+- Shopify
+- India
+apis:
+- aid: boat-lifestyle-ucp-mcp
+  name: boAt Lifestyle UCP Commerce MCP
+  description: 'The Universal Commerce Protocol (UCP) shopping service boAt Lifestyle
+    serves from its own storefront host over MCP. An anonymous JSON-RPC tools/list
+    returns 13 tools covering catalog search and lookup, product detail, cart create/update/cancel,
+    checkout create/update/complete/cancel, and order retrieval. Checkout completion
+    requires a buyer-approval step and an idempotency-key. The implementation is Shopify''s
+    native UCP support, discoverable at /.well-known/ucp.'
+  humanURL: https://www.boat-lifestyle.com/agents.md
+  baseURL: https://www.boat-lifestyle.com/api/ucp/mcp
+  tags:
+  - Agent Commerce
+  - MCP
+  - Ecommerce
+  - Catalog
+  - Checkout
+  properties:
+  - type: MCPServer
+    url: mcp/boat-lifestyle-mcp.yml
+  - type: Documentation
+    url: https://www.boat-lifestyle.com/agents.md
+  - type: Authentication
+    url: authentication/boat-lifestyle-authentication.yml
+  - type: OAuthScopes
+    url: scopes/boat-lifestyle-scopes.yml
+  - type: Conventions
+    url: conventions/boat-lifestyle-conventions.yml
+  - type: Idempotency
+    url: conventions/boat-lifestyle-conventions.yml
+  - type: DataModel
+    url: data-model/boat-lifestyle-data-model.yml
+  - type: Conformance
+    url: conformance/boat-lifestyle-conformance.yml
+  - type: Lifecycle
+    url: lifecycle/boat-lifestyle-lifecycle.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: DomainSecurity
+  url: security/boat-lifestyle-domain-security.yml
 - type: Website
+  url: https://www.boat-lifestyle.com/
+- type: Blog
+  url: https://www.boat-lifestyle.com/blogs/blog
+- type: Support
+  url: https://www.boat-lifestyle.com/pages/support
+- type: TermsOfService
+  url: https://www.boat-lifestyle.com/policies/terms-of-service
+- type: PrivacyPolicy
+  url: https://www.boat-lifestyle.com/policies/privacy-policy
+- type: SecondaryMarket
   url: https://www.hiive.com/securities/boat-lifestyle-stock
+- type: WellKnown
+  url: well-known/boat-lifestyle-well-known.yml
+- type: LLMsTxt
+  url: llms/boat-lifestyle-llms.txt
+- type: AgentSkill
+  url: skills/_index.yml
+- type: MCPServer
+  url: mcp/boat-lifestyle-mcp.yml
+- type: Authentication
+  url: authentication/boat-lifestyle-authentication.yml
+- type: OAuthScopes
+  url: scopes/boat-lifestyle-scopes.yml
+- type: Conventions
+  url: conventions/boat-lifestyle-conventions.yml
+- type: Idempotency
+  url: conventions/boat-lifestyle-conventions.yml
+- type: Conformance
+  url: conformance/boat-lifestyle-conformance.yml
+- type: Lifecycle
+  url: lifecycle/boat-lifestyle-lifecycle.yml
+- type: DataModel
+  url: data-model/boat-lifestyle-data-model.yml
+x-enrichment:
+  date: '2026-08-08'
+  status: enriched
+  artifacts_added: 18
+  pass: local-v1
+x-coverage:
+  state: covered

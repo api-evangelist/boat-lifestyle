@@ -1,0 +1,61 @@
+generated: '2026-08-08'
+method: searched
+source: live probes of https://www.boat-lifestyle.com/.well-known/*
+host: https://www.boat-lifestyle.com
+soft_404_control:
+  path: /.well-known/definitely-not-real-xyz123
+  status: 404
+  content_type: text/html
+  note: >-
+    Control path returns a real 404 HTML page, so the 200 responses below are
+    genuine documents and not a soft-404 catch-all.
+documents:
+- path: /.well-known/ucp
+  status: 200
+  content_type: application/json
+  file: boat-lifestyle-ucp.json
+  note: Universal Commerce Protocol merchant profile — services, capabilities, payment
+    handlers.
+- path: /.well-known/openid-configuration
+  status: 200
+  content_type: application/json
+  file: boat-lifestyle-openid-configuration.json
+  note: Shopify Customer Accounts OIDC discovery; issuer https://shopify.com/authentication/5789384802.
+- path: /.well-known/oauth-authorization-server
+  status: 200
+  content_type: application/json
+  file: boat-lifestyle-oauth-authorization-server.json
+  note: RFC 8414 authorization server metadata; byte-identical to the OIDC discovery
+    document.
+- path: /.well-known/oauth-protected-resource
+  status: 200
+  content_type: application/json
+  file: boat-lifestyle-oauth-protected-resource.json
+  note: RFC 9728 protected resource metadata pointing at the Shopify authorization
+    server.
+- path: /.well-known/security.txt
+  status: 404
+- path: /.well-known/api-catalog
+  status: 404
+- path: /.well-known/ai-plugin.json
+  status: 404
+- path: /.well-known/agent-card.json
+  status: 404
+- path: /.well-known/agent.json
+  status: 404
+- path: /.well-known/mcp.json
+  status: 404
+other_agent_surfaces:
+- path: /robots.txt
+  status: 200
+  note: Declares the UCP discovery and UCP/MCP endpoints and a human-approval-required
+    checkout policy.
+- path: /llms.txt
+  status: 200
+  file: ../llms/boat-lifestyle-llms.txt
+- path: /agents.md
+  status: 200
+  file: ../skills/boat-lifestyle-agents.md
+- path: /sitemap_agentic_discovery.xml
+  status: 200
+  note: Dedicated agentic-discovery sitemap listing /agents.md.

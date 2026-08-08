@@ -1,0 +1,9 @@
+{
+    "resource": "https://www.boat-lifestyle.com",
+    "authorization_servers": [
+        "https://shopify.com/authentication/5789384802"
+    ],
+    "bearer_methods_supported": [
+        "header"
+    ]
+}

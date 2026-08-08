@@ -1,0 +1,117 @@
+generated: '2026-08-08'
+method: searched
+source: https://www.boat-lifestyle.com/api/ucp/mcp
+status: published
+notes: >-
+  Live, anonymous MCP server served from boAt Lifestyle's own storefront host. An
+  unauthenticated JSON-RPC tools/list returned HTTP 200 with the full tool set and
+  per-tool inputSchema (JSON Schema draft 2020-12), saved verbatim to
+  boat-lifestyle-tools-list.json. This is Shopify's native Universal Commerce
+  Protocol implementation, not a bespoke boAt-authored API — the store is a Shopify
+  storefront and the same surface shape appears on other Shopify merchants. It is
+  recorded here because the provider genuinely serves it from its own host and
+  advertises it in robots.txt, /agents.md and /llms.txt.
+server:
+  name: boat-lifestyle-ucp
+  transport: http
+  protocol: mcp
+  url: https://www.boat-lifestyle.com/api/ucp/mcp
+  canonical_url: https://boatlifestylein.myshopify.com/api/ucp/mcp
+  authentication: none for tools/list; buyer authorization required to complete checkout
+discovery:
+  ucp_well_known: https://www.boat-lifestyle.com/.well-known/ucp
+  agents_md: https://www.boat-lifestyle.com/agents.md
+  llms_txt: https://www.boat-lifestyle.com/llms.txt
+  robots_txt: https://www.boat-lifestyle.com/robots.txt
+  agentic_sitemap: https://www.boat-lifestyle.com/sitemap_agentic_discovery.xml
+protocol:
+  name: Universal Commerce Protocol
+  spec: https://ucp.dev/2026-04-08/specification/overview/
+  version: '2026-04-08'
+  supported_versions:
+  - '2026-04-08'
+  - '2026-01-23'
+  service: dev.ucp.shopping
+  schema: https://ucp.dev/2026-04-08/services/shopping/mcp.openrpc.json
+  transports:
+  - mcp
+  - embedded
+capabilities:
+- dev.ucp.shopping.cart
+- dev.ucp.shopping.checkout
+- dev.ucp.shopping.fulfillment
+- dev.ucp.shopping.discount
+- dev.ucp.shopping.order
+- dev.ucp.shopping.catalog.search
+- dev.ucp.shopping.catalog.lookup
+- dev.shopify.catalog
+payment_handlers:
+- id: gpay
+  handler: com.google.pay
+  version: '2026-01-11'
+  card_networks:
+  - VISA
+  - MASTERCARD
+  - AMEX
+  - DISCOVER
+- id: shopify.card
+  handler: dev.shopify.card
+  version: '2026-01-15'
+  card_networks:
+  - visa
+  - master
+  - american_express
+  - discover
+  - diners_club
+tools_file: boat-lifestyle-tools-list.json
+tool_count: 13
+tools:
+- name: search_catalog
+  category: catalog
+  description: Search for products from the online store, hosted on Shopify.
+- name: lookup_catalog
+  category: catalog
+  description: Look up multiple products or variants by identifier.
+- name: get_product
+  category: catalog
+  description: Retrieve complete product detail by identifier.
+- name: get_cart
+  category: cart
+  description: Get the cart contents.
+- name: create_cart
+  category: cart
+  description: Creates a new cart.
+- name: update_cart
+  category: cart
+  description: Perform updates to a cart.
+- name: cancel_cart
+  category: cart
+  description: Cancels a cart.
+- name: get_checkout
+  category: checkout
+  description: Returns details about the checkout, including line items, totals, discounts
+    and taxes.
+- name: create_checkout
+  category: checkout
+  description: Creates a checkout.
+- name: update_checkout
+  category: checkout
+  description: Updates a checkout.
+- name: complete_checkout
+  category: checkout
+  description: Completes a checkout and returns the checkout result. Requires an idempotency-key
+    and contemporaneous buyer approval of payment.
+- name: cancel_checkout
+  category: checkout
+  description: Cancels a checkout.
+- name: get_order
+  category: order
+  description: Get the details of an order.
+x-evidence:
+  fetched: '2026-08-08'
+  url: https://www.boat-lifestyle.com/api/ucp/mcp
+  method: POST
+  body: '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+  http_status: 200
+  content_type: application/json; charset=utf-8
+  bytes: 42650

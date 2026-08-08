@@ -1,0 +1,117 @@
+generated: '2026-08-08'
+method: searched
+source:
+- https://www.boat-lifestyle.com/agents.md
+- https://www.boat-lifestyle.com/api/ucp/mcp (tools/list)
+- https://www.boat-lifestyle.com/.well-known/ucp
+scope: >-
+  Cross-cutting request/response semantics for the UCP commerce MCP surface boAt
+  Lifestyle serves at /api/ucp/mcp. Derived from the published agent instructions
+  and from the per-tool inputSchema returned by an anonymous tools/list — not from
+  an OpenAPI, because the provider publishes none.
+transport:
+  protocol: MCP over HTTP JSON-RPC 2.0
+  endpoint: https://www.boat-lifestyle.com/api/ucp/mcp
+  content_type: application/json
+  accept: application/json, text/event-stream
+  schema_dialect: https://json-schema.org/draft/2020-12/schema
+authentication:
+  discovery: none required for tools/list, catalog and cart tools
+  buyer_auth: >-
+    Shopify Customer Accounts OpenID Connect. Authorization server metadata is
+    published at /.well-known/oauth-authorization-server and the protected-resource
+    metadata at /.well-known/oauth-protected-resource; bearer token in the
+    Authorization header.
+  see: authentication/boat-lifestyle-authentication.yml
+idempotency:
+  supported: true
+  mechanism: request field
+  field: meta.idempotency-key
+  type: string
+  applies_to:
+  - complete_checkout
+  required: true
+  scope: per checkout completion
+  retention: not published
+  evidence: >-
+    complete_checkout inputSchema declares meta.properties["idempotency-key"]
+    ("An idempotency key for completing the checkout.") and lists it in
+    meta.required — the only mutating operation on the surface that can double-charge.
+  note: >-
+    Idempotency is scoped narrowly to checkout completion. Cart and checkout
+    create/update operations do not accept an idempotency key.
+pagination:
+  style: cursor
+  applies_to:
+  - search_catalog
+  request_fields:
+  - catalog.pagination.cursor
+  - catalog.pagination.limit
+  note: Opaque cursor; page size supplied as an integer limit.
+agent_identity:
+  required: true
+  field: meta.ucp-agent.profile
+  format: uri
+  note: >-
+    Every tool call requires a meta object carrying a UCP agent profile URI. This
+    is the surface's agent-attestation convention — an anonymous caller must still
+    identify which agent profile it is acting under.
+buyer_context:
+  field: catalog.context / cart.context / checkout.context
+  fields:
+  - address_country
+  - address_region
+  - postal_code
+  - language
+  - currency
+  - intent
+  standards:
+    country: ISO 3166-1 alpha-2
+    language: IETF BCP 47
+    currency: ISO 4217
+  note: Documented in agents.md as required for accurate pricing and availability.
+attribution:
+  supported: true
+  fields:
+  - referring_domain
+  - click_id_tag
+  - click_id_value
+  - utm_campaign
+  - utm_source
+  - utm_medium
+  - utm_content
+  - utm_term
+  note: Marketing attribution is a first-class part of the agent cart/checkout contract.
+identifiers:
+  format: Shopify GID
+  example_form: gid://shopify/Checkout/{id}
+  note: Checkout, cart, order and product ids are Shopify global identifiers.
+rate_limiting:
+  documented: true
+  mechanism: per-IP rate limit on the MCP endpoint
+  signal: HTTP 429
+  guidance: agents.md instructs agents to back off on 429 responses
+  published_limits: none — no numeric quota is published
+versioning:
+  scheme: dated protocol version
+  current: '2026-04-08'
+  supported:
+  - '2026-04-08'
+  - '2026-01-23'
+  discovery: /.well-known/ucp advertises supported_versions with per-version profile
+    URLs
+  see: lifecycle/boat-lifestyle-lifecycle.yml
+human_in_the_loop:
+  required: true
+  applies_to:
+  - complete_checkout
+  rule: >-
+    robots.txt and agents.md both state that checkout, payment and order placement
+    must not be completed automatically; an explicit contemporaneous human approval
+    step is required before payment. Agents unable to obtain approval are directed
+    to route the purchase through the Shop Pay skill instead.
+error_envelope:
+  format: JSON-RPC 2.0 error object
+  note: >-
+    No provider-published error code registry was found; the surface returns
+    standard JSON-RPC errors. No RFC 9457 problem+json is used.
