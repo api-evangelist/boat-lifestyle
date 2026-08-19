@@ -2,15 +2,12 @@ generated: '2026-08-08'
 method: searched
 source: https://www.boat-lifestyle.com/api/ucp/mcp
 status: published
-notes: >-
-  Live, anonymous MCP server served from boAt Lifestyle's own storefront host. An
-  unauthenticated JSON-RPC tools/list returned HTTP 200 with the full tool set and
-  per-tool inputSchema (JSON Schema draft 2020-12), saved verbatim to
-  boat-lifestyle-tools-list.json. This is Shopify's native Universal Commerce
-  Protocol implementation, not a bespoke boAt-authored API — the store is a Shopify
-  storefront and the same surface shape appears on other Shopify merchants. It is
-  recorded here because the provider genuinely serves it from its own host and
-  advertises it in robots.txt, /agents.md and /llms.txt.
+notes: Live, anonymous MCP server served from boAt Lifestyle's own storefront host. An unauthenticated
+  JSON-RPC tools/list returned HTTP 200 with the full tool set and per-tool inputSchema (JSON Schema draft
+  2020-12), saved verbatim to boat-lifestyle-tools-list.json. This is Shopify's native Universal Commerce
+  Protocol implementation, not a bespoke boAt-authored API — the store is a Shopify storefront and the
+  same surface shape appears on other Shopify merchants. It is recorded here because the provider genuinely
+  serves it from its own host and advertises it in robots.txt, /agents.md and /llms.txt.
 server:
   name: boat-lifestyle-ucp
   transport: http
@@ -89,8 +86,7 @@ tools:
   description: Cancels a cart.
 - name: get_checkout
   category: checkout
-  description: Returns details about the checkout, including line items, totals, discounts
-    and taxes.
+  description: Returns details about the checkout, including line items, totals, discounts and taxes.
 - name: create_checkout
   category: checkout
   description: Creates a checkout.
@@ -99,8 +95,8 @@ tools:
   description: Updates a checkout.
 - name: complete_checkout
   category: checkout
-  description: Completes a checkout and returns the checkout result. Requires an idempotency-key
-    and contemporaneous buyer approval of payment.
+  description: Completes a checkout and returns the checkout result. Requires an idempotency-key and contemporaneous
+    buyer approval of payment.
 - name: cancel_checkout
   category: checkout
   description: Cancels a checkout.
@@ -115,3 +111,11 @@ x-evidence:
   http_status: 200
   content_type: application/json; charset=utf-8
   bytes: 42650
+deployment:
+  mode: remote
+  endpoint: https://www.boat-lifestyle.com/api/ucp/mcp
+  verified: probed
+  probe: live
+  tools: 13
+  checked: '2026-08-12'
+  source: catalog MCP census
