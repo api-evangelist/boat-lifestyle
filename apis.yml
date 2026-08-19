@@ -14,7 +14,7 @@ description: 'boAt (legal entity Imagine Marketing Limited) is an India-based co
 url: https://raw.githubusercontent.com/api-evangelist/boat-lifestyle/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
-specificationVersion: '0.20'
+specificationVersion: '0.23'
 created: '2026-08-08'
 modified: '2026-08-08'
 image: https://www.boat-lifestyle.com/cdn/shop/files/profile-1_2e1d2124-ba4c-43f0-bb83-0e6ee038ff30.png?v=1681111976
