@@ -21,6 +21,17 @@ image: https://www.boat-lifestyle.com/cdn/shop/files/profile-1_2e1d2124-ba4c-43f
 tags:
 - Company
 - Consumer Electronics
+- E-Commerce
+- Retail
+- Audio
+- Wearables
+- Agent Commerce
+- MCP
+- Shopify
+- India
+tags_raw:
+- Company
+- Consumer Electronics
 - Ecommerce
 - Retail
 - Audio
@@ -41,6 +52,12 @@ apis:
   humanURL: https://www.boat-lifestyle.com/agents.md
   baseURL: https://www.boat-lifestyle.com/api/ucp/mcp
   tags:
+  - Agent Commerce
+  - MCP
+  - E-Commerce
+  - Catalog
+  - Checkout
+  tags_raw:
   - Agent Commerce
   - MCP
   - Ecommerce
