@@ -48,7 +48,7 @@ tags:
 - Retail
 - Audio
 - Wearables
-- Agent Commerce
+- Agentic Commerce
 - MCP
 - Shopify
 - India
@@ -74,7 +74,7 @@ apis:
   humanURL: https://www.boat-lifestyle.com/agents.md
   baseURL: https://www.boat-lifestyle.com/api/ucp/mcp
   tags:
-  - Agent Commerce
+  - Agentic Commerce
   - MCP
   - E-Commerce
   - Catalog
