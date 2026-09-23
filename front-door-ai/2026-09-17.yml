@@ -1,0 +1,26 @@
+# Front Door AI Index — boat-lifestyle — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: boat-lifestyle
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: www.boat-lifestyle.com
+  final_host: www.boat-lifestyle.com
+  ownership: own
+  owner: boat-lifestyle
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 3
+  host_score: 3
+  density: 0.8
+  words: 3740
+  tiers:
+    agentic: 0
+    core: 3
+    model: 0
+  ambiguous: 9
+  top_terms:
+    smart: 9
+    AI: 3
