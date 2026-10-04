@@ -104,6 +104,9 @@ apis:
     url: conformance/boat-lifestyle-conformance.yml
   - type: Lifecycle
     url: lifecycle/boat-lifestyle-lifecycle.yml
+  x-surface: platform-generated
+  x-platform: shopify
+  x-platform-surface: ucp
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
