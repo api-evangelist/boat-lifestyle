@@ -1,0 +1,16 @@
+generated: '2026-10-12'
+method: none
+source:
+- https://zapier.com/apps/boat-lifestyle/integrations
+- https://n8n.io/integrations/boat-lifestyle/
+- https://composio.dev/toolkits/boat-lifestyle
+- https://monid.ai/tools/boat-lifestyle
+checked:
+- https://composio.dev/toolkits/boat-lifestyle
+- https://monid.ai/tools/boat-lifestyle
+- https://n8n.io/integrations/boat-lifestyle/
+- https://zapier.com/apps/boat-lifestyle/integrations
+summary: null
+marketplace_apps: []
+edges: []
+templates: []
